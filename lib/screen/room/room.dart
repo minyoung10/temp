@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../themepage/theme.dart';
 import '../bottom/home.dart';
-import 'tab/accounting.dart';
+import 'tab/adjustment.dart';
 import 'tab/discussion.dart';
 import 'tab/meeting.dart';
 import 'tab/notification.dart';
@@ -263,7 +263,7 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
                           MissionTab(id: widget.id),
                           MeetingTab(id: widget.id),
                           DiscussionTab(id: widget.id),
-                          AccountingTab(id: widget.id),
+                          AdjustmentTab(id: widget.id),
                         ],
                       ),
                     ),

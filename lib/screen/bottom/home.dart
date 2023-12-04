@@ -45,25 +45,16 @@ class _HomePageScreenState extends State<HomePage>
       body: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 66),
+            margin: const EdgeInsets.only(top: 66),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 20),
                     Text(
                       '나의 공동체',
-                      style: blackw500.copyWith(fontSize: 16),
-                    ),
-                    const SizedBox(height: 19),
-                    Text(
-                      '광진',
-                      style: blackw500.copyWith(fontSize: 20),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '소다',
-                      style: blackw700.copyWith(fontSize: 20),
+                      style: blackw700.copyWith(fontSize: 24),
                     ),
                   ],
                 ),
@@ -76,10 +67,6 @@ class _HomePageScreenState extends State<HomePage>
                 _showBottomSheet(context, '1');
               },
               icon: const Icon(Icons.add)),
-          const Divider(
-            height: 0,
-            color: Color.fromRGBO(170, 170, 170, 1),
-          ),
           Container(
             margin: const EdgeInsets.only(top: 23, left: 25),
             height: 448,
