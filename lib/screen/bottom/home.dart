@@ -723,12 +723,12 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                                       .collection('Biginfo')
                                       .doc(roomId);
                                   await roomDoc.update({
-                                    "users_id": [
+                                    "users_id": FieldValue.arrayUnion([
                                       FirebaseAuth.instance.currentUser!.uid
-                                    ],
-                                    "users_name": [
+                                    ]),
+                                    "users_name": FieldValue.arrayUnion([
                                       FirebaseAuth.instance.currentUser!.uid
-                                    ],
+                                    ])
                                   });
                                   setState(() {
                                     roomCode.add(roomCodeText);
