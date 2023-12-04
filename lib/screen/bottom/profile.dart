@@ -6,7 +6,7 @@ import '../../themepage/theme.dart';
 import '../account/login.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({super.key});
 
   @override
   State<Profile> createState() => _ProfileScreenState();
@@ -206,7 +206,6 @@ class _ProfileScreenState extends State<Profile> {
                             TextButton(
                               onPressed: () async {
                                 await FirebaseAuth.instance.signOut();
-
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

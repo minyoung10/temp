@@ -1,9 +1,5 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../../themepage/theme.dart';
 import '../../bottom/home.dart';
@@ -20,7 +16,7 @@ class NotificationDetail extends StatefulWidget {
   });
 
   @override
-  _NotificationDetailState createState() => _NotificationDetailState();
+  State<NotificationDetail> createState() => _NotificationDetailState();
 }
 
 class _NotificationDetailState extends State<NotificationDetail> {
@@ -126,8 +122,8 @@ class _NotificationDetailState extends State<NotificationDetail> {
                       Container(
                         width: 343,
                         height: 256,
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-                        color: Color.fromRGBO(227, 255, 217, 1), // 연두색 설정
+                        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                        color: const Color.fromRGBO(227, 255, 217, 1), // 연두색 설정
                         child: Text(
                           content,
                           style: blackw500.copyWith(fontSize: 16),

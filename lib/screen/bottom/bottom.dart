@@ -5,7 +5,7 @@ import 'profile.dart';
 import 'search.dart';
 
 class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({Key? key}) : super(key: key);
+  const BottomNavigation({super.key});
   @override
   State<BottomNavigation> createState() => BottomNavigationState();
 }
@@ -25,41 +25,36 @@ class BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
-      child: Scaffold(
-        body: Center(
-          child: _widgetOptions.elementAt(selectedIndex),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(label: "홈", icon: Icon(Icons.home)),
-            BottomNavigationBarItem(
-              label: "검색",
-              icon: ImageIcon(
-                AssetImage('assets/images/search.png'),
-              ),
+    return Scaffold(
+      body: Center(
+        child: _widgetOptions.elementAt(selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(label: "홈", icon: Icon(Icons.home)),
+          BottomNavigationBarItem(
+            label: "검색",
+            icon: ImageIcon(
+              AssetImage('assets/images/search.png'),
             ),
-            BottomNavigationBarItem(
-              label: "프로필",
-              icon: ImageIcon(
-                AssetImage('assets/images/man.png'),
-              ),
+          ),
+          BottomNavigationBarItem(
+            label: "프로필",
+            icon: ImageIcon(
+              AssetImage('assets/images/man.png'),
             ),
-          ],
-          currentIndex: selectedIndex,
-          selectedItemColor: Theme.of(context).primaryColor,
-          unselectedItemColor: const Color.fromRGBO(128, 128, 128, 1),
-          backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-          onTap: onItemTapped,
-          selectedLabelStyle: pinkw500.copyWith(
-              fontSize: 12, letterSpacing: -0.24), // 선택된 아이템의 텍스트 크기 설정
-          unselectedLabelStyle:
-              greyw500.copyWith(fontSize: 12, letterSpacing: -0.24),
-        ),
+          ),
+        ],
+        currentIndex: selectedIndex,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: const Color.fromRGBO(128, 128, 128, 1),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+        onTap: onItemTapped,
+        selectedLabelStyle: pinkw500.copyWith(
+            fontSize: 12, letterSpacing: -0.24), // 선택된 아이템의 텍스트 크기 설정
+        unselectedLabelStyle:
+            greyw500.copyWith(fontSize: 12, letterSpacing: -0.24),
       ),
     );
   }

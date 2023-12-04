@@ -9,7 +9,7 @@ import '../room/room.dart';
 import '../create/room_title.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageScreenState();
@@ -36,8 +36,7 @@ class _HomePageScreenState extends State<HomePage>
 
   String? name;
   List<String> roomCode = [];
-  // ignore: unused_field, prefer_final_fields
-  TextEditingController _roomNameController = TextEditingController();
+  final TextEditingController _roomNameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -337,8 +336,7 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
 
   String? name;
   List<String> roomCode = [];
-  // ignore: unused_field, prefer_final_fields
-  TextEditingController _roomNameController = TextEditingController();
+  final TextEditingController _roomNameController = TextEditingController();
   var scroll = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -625,145 +623,143 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
               height: 327,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(23), color: Colors.white),
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 16),
-                        width: 48,
-                        height: 3.346,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFAAAAAA),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 16),
+                      width: 48,
+                      height: 3.346,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAAAAAA),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 25, top: 14),
-                      child: Text('팀 입장하기',
-                          style: blackw700.copyWith(
-                              fontSize: 18, letterSpacing: -1)),
-                    ),
-                    const SizedBox(height: 42),
-                    Container(
-                      margin: const EdgeInsets.only(left: 25, right: 25),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                '팀 코드',
-                                style: greyw500.copyWith(
-                                  fontSize: 14,
-                                  letterSpacing: -1,
-                                ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 25, top: 14),
+                    child: Text('팀 입장하기',
+                        style: blackw700.copyWith(
+                            fontSize: 18, letterSpacing: -1)),
+                  ),
+                  const SizedBox(height: 42),
+                  Container(
+                    margin: const EdgeInsets.only(left: 25, right: 25),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              '팀 코드',
+                              style: greyw500.copyWith(
+                                fontSize: 14,
+                                letterSpacing: -1,
                               ),
-                            ],
-                          ),
-                          TextField(
-                            controller: _roomNameController,
-                            style: blackw500.copyWith(
+                            ),
+                          ],
+                        ),
+                        TextField(
+                          controller: _roomNameController,
+                          style: blackw500.copyWith(
+                              fontSize: 24, letterSpacing: -1.5),
+                          decoration: InputDecoration(
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Color(0xFFEFEFEF)),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFFEFEFEF)), // 원하는 색상으로 변경
+                            ),
+                            hintText: '입력해주세요',
+                            hintStyle: greyw500.copyWith(
                                 fontSize: 24, letterSpacing: -1.5),
-                            decoration: InputDecoration(
-                              enabledBorder: const UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFFEFEFEF)),
-                              ),
-                              focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color(0xFFEFEFEF)), // 원하는 색상으로 변경
-                              ),
-                              hintText: '입력해주세요',
-                              hintStyle: greyw500.copyWith(
-                                  fontSize: 24, letterSpacing: -1.5),
-                              contentPadding: const EdgeInsets.fromLTRB(
-                                  0, 20, 0, 10), // 상하 여백 조정
-                            ),
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9]')), // 숫자만 허용
-                              LengthLimitingTextInputFormatter(
-                                  4), // 4자리까지 입력 가능
-                            ],
-                            onChanged: (value) {
-                              setState(() {
-                                if (value.length == 4) {
-                                  isConfirmButtonEnabled = true;
-                                } else {
-                                  isConfirmButtonEnabled = false;
-                                }
-                              });
-                            },
+                            contentPadding: const EdgeInsets.fromLTRB(
+                                0, 20, 0, 10), // 상하 여백 조정
                           ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 67.0),
-                    Container(
-                      width: 343,
-                      height: 45,
-                      margin: const EdgeInsets.only(left: 25, right: 25),
-                      child: ElevatedButton(
-                        onPressed: isConfirmButtonEnabled
-                            ? () async {
-                                final roomCodeText = _roomNameController.text;
-                                _roomNameController.clear();
-
-                                final querySnapshot = await firestore
-                                    .collection('Biginfo')
-                                    .where('code', isEqualTo: roomCodeText)
-                                    .get();
-
-                                if (querySnapshot.docs.isNotEmpty) {
-                                  final roomId = querySnapshot.docs[0].id;
-                                  final roomDoc = firestore
-                                      .collection('Biginfo')
-                                      .doc(roomId);
-                                  await roomDoc.update({
-                                    "users_id": FieldValue.arrayUnion([
-                                      FirebaseAuth.instance.currentUser!.uid
-                                    ]),
-                                    "users_name": FieldValue.arrayUnion([
-                                      FirebaseAuth.instance.currentUser!.uid
-                                    ])
-                                  });
-                                  setState(() {
-                                    roomCode.add(roomCodeText);
-                                  });
-                                  roomDoc.get().then((docSnapshot) {
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Room(
-                                          id: roomId,
-                                        ),
-                                      ),
-                                    );
-                                  }).catchError((error) {
-                                    debugPrint(
-                                        'Error getting document: $error');
-                                  });
-                                }
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'[0-9]')), // 숫자만 허용
+                            LengthLimitingTextInputFormatter(
+                                4), // 4자리까지 입력 가능
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              if (value.length == 4) {
+                                isConfirmButtonEnabled = true;
+                              } else {
+                                isConfirmButtonEnabled = false;
                               }
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // 버튼 모서리 둥글기 설정
-                            ),
-                            backgroundColor: const Color(0xFFEF597D)),
-                        child: Text(
-                          '입장하기',
-                          style: whitew700.copyWith(fontSize: 16),
+                            });
+                          },
                         ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 67.0),
+                  Container(
+                    width: 343,
+                    height: 45,
+                    margin: const EdgeInsets.only(left: 25, right: 25),
+                    child: ElevatedButton(
+                      onPressed: isConfirmButtonEnabled
+                          ? () async {
+                              final roomCodeText = _roomNameController.text;
+                              _roomNameController.clear();
+              
+                              final querySnapshot = await firestore
+                                  .collection('Biginfo')
+                                  .where('code', isEqualTo: roomCodeText)
+                                  .get();
+              
+                              if (querySnapshot.docs.isNotEmpty) {
+                                final roomId = querySnapshot.docs[0].id;
+                                final roomDoc = firestore
+                                    .collection('Biginfo')
+                                    .doc(roomId);
+                                await roomDoc.update({
+                                  "users_id": FieldValue.arrayUnion([
+                                    FirebaseAuth.instance.currentUser!.uid
+                                  ]),
+                                  "users_name": FieldValue.arrayUnion([
+                                    FirebaseAuth.instance.currentUser!.uid
+                                  ])
+                                });
+                                setState(() {
+                                  roomCode.add(roomCodeText);
+                                });
+                                roomDoc.get().then((docSnapshot) {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Room(
+                                        id: roomId,
+                                      ),
+                                    ),
+                                  );
+                                }).catchError((error) {
+                                  debugPrint(
+                                      'Error getting document: $error');
+                                });
+                              }
+                            }
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(12), // 버튼 모서리 둥글기 설정
+                          ),
+                          backgroundColor: const Color(0xFFEF597D)),
+                      child: Text(
+                        '입장하기',
+                        style: whitew700.copyWith(fontSize: 16),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             );
           },

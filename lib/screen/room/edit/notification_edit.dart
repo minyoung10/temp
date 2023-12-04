@@ -20,8 +20,7 @@ class EditNotification extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
-  _EditNotificationState createState() => _EditNotificationState();
+  State<EditNotification> createState() => _EditNotificationState();
 }
 
 class _EditNotificationState extends State<EditNotification> {
@@ -185,7 +184,7 @@ class _EditNotificationState extends State<EditNotification> {
       _uploadImageToFirebase();
     } else {
       if (kDebugMode) {
-        print('이미지 선택안함');
+        debugPrint('이미지 선택안함');
       }
     }
   }
@@ -194,13 +193,13 @@ class _EditNotificationState extends State<EditNotification> {
   Future<void> _uploadImageToFirebase() async {
     if (_pickedFile == null) {
       if (kDebugMode) {
-        print('이미지가 선택되지 않았습니다.');
+        debugPrint('이미지가 선택되지 않았습니다.');
       }
       return;
     }
 
     final imageBytes = await File(_pickedFile!.path).readAsBytes();
-    final imageName = DateTime.now().second.toString() + '.jpg';
+    final imageName = '${DateTime.now().second}.jpg';
     final storageReference = FirebaseStorage.instance.ref(imageName);
 
     try {
@@ -213,11 +212,11 @@ class _EditNotificationState extends State<EditNotification> {
         RoomProvider.image = _uploadedImageUrl;
       });
       if (kDebugMode) {
-        print('이미지 업로드 성공\n');
+        debugPrint('이미지 업로드 성공\n');
       }
     } catch (e) {
       if (kDebugMode) {
-        print('이미지 업로드 실패: $e');
+        debugPrint('이미지 업로드 실패: $e');
       }
     }
   }

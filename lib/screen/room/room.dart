@@ -13,8 +13,8 @@ class Room extends StatefulWidget {
 
   const Room({
     required this.id,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<Room> createState() => _RoomState();
@@ -34,249 +34,236 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  // ignore: unused_field, prefer_final_fields
-  TextEditingController _roomNameController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
-      child: StreamBuilder(
-          stream: firestore.collection('Biginfo').snapshots(),
-          builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            final docs = snapshot.data!.docs;
-            final filteredDocs =
-                docs.where((doc) => doc['id'] == widget.id).toList();
+    return StreamBuilder(
+        stream: firestore.collection('Biginfo').snapshots(),
+        builder: (BuildContext context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final docs = snapshot.data!.docs;
+          final filteredDocs =
+              docs.where((doc) => doc['id'] == widget.id).toList();
 
-            if (filteredDocs.isNotEmpty) {
-              final roomSnapshot = filteredDocs.first;
-              final roomData = roomSnapshot.data();
+          if (filteredDocs.isNotEmpty) {
+            final roomSnapshot = filteredDocs.first;
+            final roomData = roomSnapshot.data();
 
-              return Scaffold(
-                backgroundColor: Colors.white,
-                body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Stack(
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          height: 349,
-                          child: ColorFiltered(
-                            colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.4),
-                              BlendMode.darken,
-                            ),
-                            child: Image.network(
-                              roomData['roomImage'].toString(),
-                              fit: BoxFit.cover,
-                            ),
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Stack(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: 349,
+                        child: ColorFiltered(
+                          colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.4),
+                            BlendMode.darken,
+                          ),
+                          child: Image.network(
+                            roomData['roomImage'].toString(),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        Positioned(
-                          top: 62,
-                          left: 10,
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.popUntil(
-                                  context, ModalRoute.withName('/'));
-                            },
-                            color: Colors.white,
-                            icon: const Icon(
-                              Icons.arrow_back_ios_rounded,
-                            ),
+                      ),
+                      Positioned(
+                        top: 62,
+                        left: 10,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.popUntil(
+                                context, ModalRoute.withName('/'));
+                          },
+                          color: Colors.white,
+                          icon: const Icon(
+                            Icons.arrow_back_ios_rounded,
                           ),
                         ),
-                        Positioned(
-                          top: 77,
-                          right: 25,
-                          child: GestureDetector(
-                            onTap: () async {
-                              _showBottomSheet(context, '1');
-                            },
-                            child: SizedBox(
-                              width: 30,
-                              height: 18,
-                              child: Image.asset('assets/images/kebap.png'),
-                            ),
+                      ),
+                      Positioned(
+                        top: 77,
+                        right: 25,
+                        child: GestureDetector(
+                          onTap: () async {
+                            _showBottomSheet(context, '1');
+                          },
+                          child: SizedBox(
+                            width: 30,
+                            height: 18,
+                            child: Image.asset('assets/images/kebap.png'),
                           ),
                         ),
-                        Positioned(
-                          top: 236,
-                          left: 25,
-                          child: Text(roomData['title'],
-                              style: whitew700.copyWith(
-                                fontSize: 24.0,
-                              )),
-                        ),
-                        Positioned(
-                          top: 270,
-                          left: 25,
-                          child: Container(
-                            width: 159,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(3), // 반지름 값을 설정합니다.
-                              color: const Color.fromRGBO(255, 239, 244, 1),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 12, bottom: 3),
-                                  child: Text(roomData['mission'],
-                                      style: pinkw700.copyWith(
-                                        fontSize: 16.0,
-                                      )),
-                                ),
-                              ],
-                            ),
+                      ),
+                      Positioned(
+                        top: 236,
+                        left: 25,
+                        child: Text(roomData['title'],
+                            style: whitew700.copyWith(
+                              fontSize: 24.0,
+                            )),
+                      ),
+                      Positioned(
+                        top: 270,
+                        left: 25,
+                        child: Container(
+                          width: 159,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(3), // 반지름 값을 설정합니다.
+                            color: const Color.fromRGBO(255, 239, 244, 1),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 317),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(23),
-                              topRight: Radius.circular(23),
-                            ),
-                          ),
-                          child: Column(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    width: 379,
-                                    height: 50,
-                                    child: TabBar(
-                                      indicator: UnderlineTabIndicator(
-                                        borderSide: const BorderSide(
-                                          width: 2, // Bottom line width
-                                        ), // Bottom line padding
-                                        borderRadius: BorderRadius.circular(
-                                            2), // Adjust the radius as needed
-                                      ),
-                                      indicatorWeight: 3,
-                                      indicatorColor:
-                                          const Color.fromRGBO(36, 38, 37, 1),
-                                      indicatorSize: TabBarIndicatorSize.label,
-                                      indicatorPadding: const EdgeInsets.only(
-                                          bottom:
-                                              1), // Adjust horizontal padding
-                                      controller: _tabController,
-                                      // label color
-                                      labelColor:
-                                          const Color.fromRGBO(36, 38, 37, 1),
-                                      // unselected label color
-                                      unselectedLabelColor:
-                                          const Color.fromARGB(
-                                              255, 151, 151, 151),
-
-                                      tabs: const [
-                                        SizedBox(
-                                          width: 90,
-                                          child: Tab(
-                                            child: Text(
-                                              '공지사항',
-                                              style: TextStyle(
-                                                fontFamily: 'Pretendard',
-                                                fontSize: 18, // Font size
-                                                fontWeight: FontWeight
-                                                    .w700, // Font weight 700
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 90,
-                                          child: Tab(
-                                            child: Text(
-                                              '모임',
-                                              style: TextStyle(
-                                                fontFamily: 'Pretendard',
-                                                fontSize: 18, // Font size
-                                                fontWeight: FontWeight
-                                                    .w700, // Font weight 700
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 90,
-                                          child: Tab(
-                                            child: Text(
-                                              '회의록',
-                                              style: TextStyle(
-                                                fontFamily: 'Pretendard',
-                                                fontSize: 18, // Font size
-                                                fontWeight: FontWeight
-                                                    .w700, // Font weight 700
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 90,
-                                          child: Tab(
-                                            child: Text(
-                                              '정산',
-                                              style: TextStyle(
-                                                fontFamily: 'Pretendard',
-                                                fontSize: 18, // Font size
-                                                fontWeight: FontWeight
-                                                    .w700, // Font weight 700
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(left: 12, bottom: 3),
+                                child: Text(roomData['mission'],
+                                    style: pinkw700.copyWith(
+                                      fontSize: 16.0,
+                                    )),
                               ),
-                              const Divider(
-                                  height: 0,
-                                  color: Color.fromRGBO(170, 170, 170, 1))
                             ],
                           ),
                         ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 317),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(23),
+                            topRight: Radius.circular(23),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  width: 379,
+                                  height: 50,
+                                  child: TabBar(
+                                    indicator: UnderlineTabIndicator(
+                                      borderSide: const BorderSide(
+                                        width: 2, // Bottom line width
+                                      ), // Bottom line padding
+                                      borderRadius: BorderRadius.circular(
+                                          2), // Adjust the radius as needed
+                                    ),
+                                    indicatorWeight: 3,
+                                    indicatorColor:
+                                        const Color.fromRGBO(36, 38, 37, 1),
+                                    indicatorSize: TabBarIndicatorSize.label,
+                                    indicatorPadding: const EdgeInsets.only(
+                                        bottom: 1), // Adjust horizontal padding
+                                    controller: _tabController,
+                                    // label color
+                                    labelColor:
+                                        const Color.fromRGBO(36, 38, 37, 1),
+                                    // unselected label color
+                                    unselectedLabelColor: const Color.fromARGB(
+                                        255, 151, 151, 151),
+
+                                    tabs: const [
+                                      SizedBox(
+                                        width: 90,
+                                        child: Tab(
+                                          child: Text(
+                                            '공지사항',
+                                            style: TextStyle(
+                                              fontFamily: 'Pretendard',
+                                              fontSize: 18, // Font size
+                                              fontWeight: FontWeight
+                                                  .w700, // Font weight 700
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 90,
+                                        child: Tab(
+                                          child: Text(
+                                            '모임',
+                                            style: TextStyle(
+                                              fontFamily: 'Pretendard',
+                                              fontSize: 18, // Font size
+                                              fontWeight: FontWeight
+                                                  .w700, // Font weight 700
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 90,
+                                        child: Tab(
+                                          child: Text(
+                                            '회의록',
+                                            style: TextStyle(
+                                              fontFamily: 'Pretendard',
+                                              fontSize: 18, // Font size
+                                              fontWeight: FontWeight
+                                                  .w700, // Font weight 700
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 90,
+                                        child: Tab(
+                                          child: Text(
+                                            '정산',
+                                            style: TextStyle(
+                                              fontFamily: 'Pretendard',
+                                              fontSize: 18, // Font size
+                                              fontWeight: FontWeight
+                                                  .w700, // Font weight 700
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(
+                                height: 0,
+                                color: Color.fromRGBO(170, 170, 170, 1))
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 485,
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        MissionTab(id: widget.id),
+                        MeetingTab(id: widget.id),
+                        DiscussionTab(id: widget.id),
+                        AdjustmentTab(id: widget.id),
                       ],
                     ),
-                    SizedBox(
-                      height: 485,
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          MissionTab(id: widget.id),
-                          MeetingTab(id: widget.id),
-                          DiscussionTab(id: widget.id),
-                          AdjustmentTab(id: widget.id),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              return const Text('');
-            }
-
-            ;
-          }),
-    );
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return const Text('');
+          }
+        });
   }
 
   void _showBottomSheet(BuildContext context, String text) {
@@ -420,7 +407,7 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
                             Navigator.popUntil(
                                 context, ModalRoute.withName('/'));
                           } catch (e) {
-                            print("Error deleting document: $e");
+                            debugPrint("Error deleting document: $e");
                           }
                         },
                       ),

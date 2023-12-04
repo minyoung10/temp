@@ -12,8 +12,8 @@ class UserProvider {
   static String? userIdInFireStore;
 }
 
-class joyUser {
-  joyUser({
+class JoyUser {
+  JoyUser({
     required this.userName,
     required this.userEmail,
     required this.userPassword,
@@ -25,10 +25,10 @@ class joyUser {
   final String? userPassword;
   final String? userId;
 
-  factory joyUser.fromFirebase(
+  factory JoyUser.fromFirebase(
       QueryDocumentSnapshot<Map<String, dynamic>> docSnap) {
     final snapshotData = docSnap.data();
-    return joyUser(
+    return JoyUser(
         userName: snapshotData[userNameFieldName],
         userEmail: snapshotData[userEmailFieldName],
         userPassword: snapshotData[userPasswordFieldName],

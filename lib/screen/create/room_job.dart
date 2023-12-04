@@ -358,7 +358,7 @@ class _SetRoomJobState extends State<SetRoomJob> {
       backgroundColor: Colors.transparent,
       context: context,
       builder: (BuildContext context) {
-        return RoomImageSet();
+        return const RoomImageSet();
       },
     );
   }

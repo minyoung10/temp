@@ -86,10 +86,10 @@ class _AdjustmentTabState extends State<AdjustmentTab> {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 20),
             ),
-            child: Container(
+            child: const SizedBox(
               width: 343,
               height: 45,
-              child: const Center(
+              child: Center(
                 child: Text(
                   '정산 요청하기',
                   style: TextStyle(

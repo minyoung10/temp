@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,8 +15,8 @@ class AddNotification extends StatefulWidget {
 
   const AddNotification({
     required this.id,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<AddNotification> createState() => _AddNotificationState();
@@ -181,13 +180,6 @@ class _AddNotificationState extends State<AddNotification> {
     );
   }
 
-  _generateRandom4Digit() {
-    final random = Random();
-    int fourDigitRandom = random.nextInt(10000); // 0부터 9999까지의 난수 생성
-    String formattedRandom = fourDigitRandom.toString().padLeft(4, '0');
-    BigInfoProvider.code = formattedRandom;
-  }
-
   _getPhotoLibraryImage() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -198,22 +190,19 @@ class _AddNotificationState extends State<AddNotification> {
       _uploadImageToFirebase();
     } else {
       if (kDebugMode) {
-        print('이미지 선택안함');
+        debugPrint('이미지 선택안함');
       }
     }
   }
 
   String? _uploadedImageUrl; // 업로드 된 이미지 URL 저장 변수 추가
-  Future<String> _getUploadedImageUrl(Reference ref) async {
-    return await ref.getDownloadURL();
-  }
 
   _uploadImageToFirebase() async {
     await Firebase.initializeApp();
     // 선택한 이미지가 있는지 확인
     if (_pickedFile == null) {
       if (kDebugMode) {
-        print('이미지가 선택되지 않았습니다.');
+        debugPrint('이미지가 선택되지 않았습니다.');
       }
       return;
     }
@@ -234,11 +223,11 @@ class _AddNotificationState extends State<AddNotification> {
         BigInfoProvider.roomImage = _uploadedImageUrl;
       });
       if (kDebugMode) {
-        print('이미지 업로드 성공\n');
+        debugPrint('이미지 업로드 성공\n');
       }
     } catch (e) {
       if (kDebugMode) {
-        print('이미지 업로드 실패: $e');
+        debugPrint('이미지 업로드 실패: $e');
       }
     }
   }

@@ -1,11 +1,5 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../themepage/theme.dart';
 import '../add/notification_add.dart';
@@ -20,16 +14,12 @@ class MissionTab extends StatefulWidget {
 
 class MissionTabState extends State<MissionTab> {
   final firestore = FirebaseFirestore.instance;
-  XFile? _pickedFile;
   String? roomDataId;
   String? userindex;
 
-  int? image_count;
-  int? check_count = 0;
   var scroll = ScrollController();
   @override
   Widget build(BuildContext context) {
-    final _imageSize = MediaQuery.of(context).size.width / 4;
     return Column(
       children: [
         Expanded(
@@ -58,7 +48,7 @@ class MissionTabState extends State<MissionTab> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        print(roomData[index]['id']);
+                        debugPrint(roomData[index]['id']);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -80,8 +70,8 @@ class MissionTabState extends State<MissionTab> {
                               style: blackw700.copyWith(fontSize: 18),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
-                              color: Color.fromRGBO(227, 255, 217, 1), // 연두색 설정
+                              padding: const EdgeInsets.all(10),
+                              color: const Color.fromRGBO(227, 255, 217, 1), // 연두색 설정
                               child: Text(
                                 roomData[index]['context'],
                                 style: blackw500.copyWith(fontSize: 18),
@@ -120,10 +110,10 @@ class MissionTabState extends State<MissionTab> {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 20),
             ),
-            child: Container(
+            child: const SizedBox(
               width: 343,
               height: 45,
-              child: const Center(
+              child: Center(
                 child: Text(
                   '공지 작성하기',
                   style: TextStyle(

@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../info/user.dart';
 import '../../themepage/theme.dart';
 import '../bottom/bottom.dart';
 
@@ -22,7 +21,7 @@ Future<UserCredential> signInWithGoogle() async {
 }
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageScreenState();
@@ -32,9 +31,6 @@ class _LoginPageScreenState extends State<LoginPage> {
   void _googleSignIn() async {
     try {
       UserCredential userCredential = await signInWithGoogle();
-
-      // 모달 창을 통해 이름을 입력 받음
-      // String? enteredName = await _showNameInputDialog(context);
 
       final db = FirebaseFirestore.instance;
       final docref =
@@ -49,7 +45,7 @@ class _LoginPageScreenState extends State<LoginPage> {
         MaterialPageRoute(builder: (context) => const BottomNavigation()),
       );
     } catch (e) {
-      print('Error signing in with Google: $e');
+      debugPrint('Error signing in with Google: $e');
     }
   }
 
@@ -70,52 +66,12 @@ class _LoginPageScreenState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "operation-not-allowed":
-          print("Anonymous auth hasn't been enabled for this project.");
+          debugPrint("Anonymous auth hasn't been enabled for this project.");
           break;
         default:
-          print("Unknown error.");
+          debugPrint("Unknown error.");
       }
     }
-  }
-
-  Future<String?> _showNameInputDialog(BuildContext context) async {
-    String? enteredName;
-
-    return await showDialog<String>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('이름을 입력해 주세요'),
-          content: TextField(
-            decoration: InputDecoration(
-              //준) 선택되지 않은 밑줄 속성
-              enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Color(0xFFEFEFEF)),
-              ),
-              //준) 선택된 밑줄 속성 둘을 일치시켰음
-              focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Color(0xFFEFEFEF)),
-              ),
-              hintText: "예) 전산전자 공학부 임원단",
-              hintStyle: greyw500.copyWith(fontSize: 24),
-            ),
-            onChanged: (value) {
-              enteredName = value;
-              UserProvider.userName = enteredName;
-            },
-          ),
-          backgroundColor: Colors.white10,
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(enteredName);
-              },
-              child: const Text('확인'),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
