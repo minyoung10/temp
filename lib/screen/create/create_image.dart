@@ -172,8 +172,7 @@ class _RoomImageSetState extends State<RoomImageSet> {
                   margin: const EdgeInsets.only(left: 25, top: 14),
                   child: Text(
                     '방에 들어갈 이미지는 무엇인가요?',
-                    style:
-                        blackw700.copyWith(fontSize: 18, letterSpacing: -1),
+                    style: blackw700.copyWith(fontSize: 18, letterSpacing: -1),
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -193,19 +192,18 @@ class _RoomImageSetState extends State<RoomImageSet> {
                       _getPhotoLibraryImage();
                     },
                     style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(12), // 버튼 모서리 둥글기 설정
-                      ),
-                      elevation: 0, // 이 부분을 추가하여 쉐도우 없앰
-                      backgroundColor: const Color.fromRGBO(255, 239, 244, 1),
-                    ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(12), // 버튼 모서리 둥글기 설정
+                        ),
+                        elevation: 0, // 이 부분을 추가하여 쉐도우 없앰
+                        backgroundColor: const Color.fromRGBO(54, 209, 0, 0.2)),
                     child: const Text(
                       '갤러리',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: Color.fromRGBO(239, 89, 125, 1)),
+                          color: Color.fromRGBO(54, 209, 0, 1)),
                     ),
                   ),
                 ),

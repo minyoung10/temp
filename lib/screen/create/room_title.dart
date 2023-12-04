@@ -72,7 +72,7 @@ class _SetRoomTitleState extends State<SetRoomTitle> {
                       flex: 1,
                       child: Container(
                         decoration: const BoxDecoration(
-                          color: Color(0xffEF597D),
+                          color: Color.fromRGBO(54, 209, 0, 1),
                           borderRadius: BorderRadius.all(
                             Radius.circular(20.0),
                           ),
@@ -172,7 +172,8 @@ class _SetRoomTitleState extends State<SetRoomTitle> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => const SetRoomMission())));
+                                  builder: ((context) =>
+                                      const SetRoomMission())));
                         },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 45),
@@ -180,7 +181,7 @@ class _SetRoomTitleState extends State<SetRoomTitle> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    backgroundColor: const Color(0xffEF597D),
+                    backgroundColor: Theme.of(context).primaryColor,
                     disabledBackgroundColor: Colors.grey,
                   ),
                   child: Text(

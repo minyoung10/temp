@@ -478,14 +478,9 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                     child: Center(
                         child: Column(
                       children: [
-                        const SizedBox(height: 34),
-                        SizedBox(
-                            width: 292,
-                            height: 188,
-                            child: Image.asset('assets/images/login.png')),
-                        const SizedBox(height: 9),
+                        const SizedBox(height: 120),
                         const Text(
-                          '친구들과 함께',
+                          '효율적인',
                           style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontSize: 24,
@@ -493,7 +488,7 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                               letterSpacing: -0.48),
                         ),
                         const Text(
-                          '습관을 만들어보세요',
+                          '팀 관리를 해보세요',
                           style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontSize: 24,
@@ -508,8 +503,8 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             foregroundColor: const Color(0xFFFFFFFF),
-                            backgroundColor:
-                                const Color(0xFFEF597D), // 버튼 내의 아이콘과 텍스트 색상
+                            backgroundColor: const Color.fromRGBO(
+                                54, 209, 0, 1), // 버튼 내의 아이콘과 텍스트 색상
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(12), // 모서리 보더 반경
@@ -665,8 +660,7 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                               fontSize: 24, letterSpacing: -1.5),
                           decoration: InputDecoration(
                             enabledBorder: const UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Color(0xFFEFEFEF)),
+                              borderSide: BorderSide(color: Color(0xFFEFEFEF)),
                             ),
                             focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
@@ -682,8 +676,7 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'[0-9]')), // 숫자만 허용
-                            LengthLimitingTextInputFormatter(
-                                4), // 4자리까지 입력 가능
+                            LengthLimitingTextInputFormatter(4), // 4자리까지 입력 가능
                           ],
                           onChanged: (value) {
                             setState(() {
@@ -708,24 +701,21 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                           ? () async {
                               final roomCodeText = _roomNameController.text;
                               _roomNameController.clear();
-              
+
                               final querySnapshot = await firestore
                                   .collection('Biginfo')
                                   .where('code', isEqualTo: roomCodeText)
                                   .get();
-              
+
                               if (querySnapshot.docs.isNotEmpty) {
                                 final roomId = querySnapshot.docs[0].id;
-                                final roomDoc = firestore
-                                    .collection('Biginfo')
-                                    .doc(roomId);
+                                final roomDoc =
+                                    firestore.collection('Biginfo').doc(roomId);
                                 await roomDoc.update({
-                                  "users_id": FieldValue.arrayUnion([
-                                    FirebaseAuth.instance.currentUser!.uid
-                                  ]),
-                                  "users_name": FieldValue.arrayUnion([
-                                    FirebaseAuth.instance.currentUser!.uid
-                                  ])
+                                  "users_id": FieldValue.arrayUnion(
+                                      [FirebaseAuth.instance.currentUser!.uid]),
+                                  "users_name": FieldValue.arrayUnion(
+                                      [FirebaseAuth.instance.currentUser!.uid])
                                 });
                                 setState(() {
                                   roomCode.add(roomCodeText);
@@ -741,8 +731,7 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                                     ),
                                   );
                                 }).catchError((error) {
-                                  debugPrint(
-                                      'Error getting document: $error');
+                                  debugPrint('Error getting document: $error');
                                 });
                               }
                             }

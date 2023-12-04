@@ -69,10 +69,10 @@ class _SetRoomJobState extends State<SetRoomJob> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 5,
                       child: Container(
                         decoration: const BoxDecoration(
-                          color: Color(0xffEF597D),
+                          color: Color.fromRGBO(54, 209, 0, 1),
                           borderRadius: BorderRadius.all(
                             Radius.circular(20.0),
                           ),
@@ -129,7 +129,7 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 0
-                        ? const Color(0xFFFFEFF4)
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
                         : const Color(
                             0xFFFAFAFA), // Updated colo// Updated color
                   ),
@@ -139,14 +139,14 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🛌  팀장",
+                          "팀장",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 0
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? const Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -169,7 +169,7 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 1
-                        ? const Color(0xFFFFEFF4)
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
                         : const Color(0xFFFAFAFA), // Updated color
                   ),
                   child: Row(
@@ -178,14 +178,14 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🧼  부팀장",
+                          "부팀장",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 1
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? const Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -208,7 +208,7 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 2
-                        ? const Color(0xFFFFEFF4)
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
                         : const Color(0xFFFAFAFA), // Updated color
                   ),
                   child: Row(
@@ -217,14 +217,14 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🍚  회계",
+                          "회계",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 2
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? const Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -247,7 +247,7 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 3
-                        ? const Color(0xFFFFEFF4)
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
                         : const Color(0xFFFAFAFA), // Updated color
                   ),
                   child: Row(
@@ -256,14 +256,14 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🍚  서기",
+                          "서기",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 3
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? const Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -286,7 +286,7 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 4
-                        ? const Color(0xFFFFEFF4)
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
                         : const Color(0xFFFAFAFA), // Updated color
                   ),
                   child: Row(
@@ -295,14 +295,14 @@ class _SetRoomJobState extends State<SetRoomJob> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🍚  팀원",
+                          "팀원",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 4
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? const Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -316,15 +316,15 @@ class _SetRoomJobState extends State<SetRoomJob> {
                   onPressed: _selectedButtonIndex != -1 //기본 상태가 아니면
                       ? () {
                           if (_selectedButtonIndex == 0) {
-                            BigInfoProvider.job = '🛌  팀장';
+                            BigInfoProvider.job = '팀장';
                           } else if (_selectedButtonIndex == 1) {
-                            BigInfoProvider.job = "🧼  부팀장";
+                            BigInfoProvider.job = "부팀장";
                           } else if (_selectedButtonIndex == 2) {
-                            BigInfoProvider.job = "🍚  회계";
+                            BigInfoProvider.job = "회계";
                           } else if (_selectedButtonIndex == 3) {
-                            BigInfoProvider.job = "🍚  서기";
+                            BigInfoProvider.job = "서기";
                           } else if (_selectedButtonIndex == 4) {
-                            BigInfoProvider.job = "🍚  팀원";
+                            BigInfoProvider.job = "팀원";
                           }
                           _showEnterRoomBottomSheet(context);
                         }
@@ -336,7 +336,7 @@ class _SetRoomJobState extends State<SetRoomJob> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    backgroundColor: const Color(0xffEF597D),
+                    backgroundColor: Theme.of(context).primaryColor,
                     disabledBackgroundColor: Colors.grey,
                   ),
                   child: const Text(

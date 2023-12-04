@@ -69,10 +69,10 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Container(
                         decoration: const BoxDecoration(
-                          color: Color(0xffEF597D),
+                          color: Color.fromRGBO(54, 209, 0, 1),
                           borderRadius: BorderRadius.all(
                             Radius.circular(20.0),
                           ),
@@ -109,8 +109,8 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                     ),
                     Text(
                       "1가지만 선택할 수 있어요",
-                      style: greyw500.copyWith(
-                          fontSize: 16, letterSpacing: -0.5),
+                      style:
+                          greyw500.copyWith(fontSize: 16, letterSpacing: -0.5),
                     ),
                   ],
                 ),
@@ -129,8 +129,9 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 0
-                        ? const Color(0xFFFFEFF4)
-                        : const Color(0xFFFAFAFA), // Updated colo// Updated color
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
+                        : const Color(
+                            0xFFFAFAFA), // Updated colo// Updated color
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,14 +139,14 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🛌  동아리",
+                          "동아리",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 0
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -168,7 +169,7 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 1
-                        ? const Color(0xFFFFEFF4)
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
                         : const Color(0xFFFAFAFA), // Updated color
                   ),
                   child: Row(
@@ -177,14 +178,14 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🧼  학회",
+                          "학회",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 1
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -207,7 +208,7 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 2
-                        ? const Color(0xFFFFEFF4)
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
                         : const Color(0xFFFAFAFA), // Updated color
                   ),
                   child: Row(
@@ -216,14 +217,14 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🍚  신앙 공동체",
+                          "신앙 공동체",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 2
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -246,7 +247,7 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: _selectedButtonIndex == 3
-                        ? const Color(0xFFFFEFF4)
+                        ? const Color.fromRGBO(54, 209, 0, 0.2)
                         : const Color(0xFFFAFAFA), // Updated color
                   ),
                   child: Row(
@@ -255,14 +256,14 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                       Container(
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          "🍚  공동체 리더십 훈련",
+                          "공동체 리더십 훈련",
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             letterSpacing: -0.36,
                             color: _selectedButtonIndex == 3
-                                ? const Color.fromRGBO(239, 69, 125, 1)
+                                ? const Color.fromRGBO(54, 209, 0, 1)
                                 : const Color(0xFF242625),
                           ),
                         ),
@@ -276,13 +277,13 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                   onPressed: _selectedButtonIndex != -1 //기본 상태가 아니면
                       ? () {
                           if (_selectedButtonIndex == 0) {
-                            BigInfoProvider.mission = '🛌  동아리';
+                            BigInfoProvider.mission = '동아리';
                           } else if (_selectedButtonIndex == 1) {
-                            BigInfoProvider.mission = "🧼  학회";
+                            BigInfoProvider.mission = "학회";
                           } else if (_selectedButtonIndex == 2) {
-                            BigInfoProvider.mission = "🍚  신앙 공동체";
+                            BigInfoProvider.mission = "신앙 공동체";
                           } else if (_selectedButtonIndex == 3) {
-                            BigInfoProvider.mission = "🍚  공동체 리더십 훈련";
+                            BigInfoProvider.mission = "공동체 리더십 훈련";
                           }
                           Navigator.push(
                               context,
@@ -297,7 +298,7 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    backgroundColor: const Color(0xffEF597D),
+                    backgroundColor: Theme.of(context).primaryColor,
                     disabledBackgroundColor: Colors.grey,
                   ),
                   child: const Text(
