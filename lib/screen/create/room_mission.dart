@@ -69,7 +69,7 @@ class _SetRoomMissionState extends State<SetRoomMission> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 3,
+                      flex: 2,
                       child: Container(
                         decoration: const BoxDecoration(
                           color: Color.fromRGBO(54, 209, 0, 1),

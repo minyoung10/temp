@@ -152,6 +152,7 @@ class _SetRoomTitleState extends State<SetRoomTitle> {
                             },
                           ),
                   ),
+                  controller: _textEditingController,
                   onChanged: (value) {
                     setState(() {
                       _enteredText = value;

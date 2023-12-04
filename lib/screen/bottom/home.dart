@@ -91,7 +91,7 @@ class _HomePageScreenState extends State<HomePage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 25),
+                margin: const EdgeInsets.only(left: 25, top: 25),
                 child: const Text(
                   '공동체 시작하기',
                   style: TextStyle(
@@ -120,7 +120,7 @@ class _HomePageScreenState extends State<HomePage>
                       style:
                           blackw500.copyWith(fontSize: 16, letterSpacing: -1)),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       shadowColor: Colors.transparent),
                 ),
               ),
@@ -139,7 +139,7 @@ class _HomePageScreenState extends State<HomePage>
                       style:
                           blackw500.copyWith(fontSize: 16, letterSpacing: -1)),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       shadowColor: Colors.transparent),
                 ),
               ),
@@ -547,7 +547,7 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 25),
+                margin: const EdgeInsets.only(left: 25, top: 25),
                 child: const Text(
                   '공동체 시작하기',
                   style: TextStyle(
@@ -576,7 +576,7 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                       style:
                           blackw500.copyWith(fontSize: 16, letterSpacing: -1)),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       shadowColor: Colors.transparent),
                 ),
               ),
@@ -595,7 +595,7 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                       style:
                           blackw500.copyWith(fontSize: 16, letterSpacing: -1)),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       shadowColor: Colors.transparent),
                 ),
               ),
