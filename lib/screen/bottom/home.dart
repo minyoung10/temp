@@ -683,11 +683,18 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                             ),
                             keyboardType: TextInputType.number,
                             inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')), // 숫자만 허용
+                              LengthLimitingTextInputFormatter(
+                                  4), // 4자리까지 입력 가능
                             ],
                             onChanged: (value) {
                               setState(() {
-                                isConfirmButtonEnabled = value.length == 4;
+                                if (value.length == 4) {
+                                  isConfirmButtonEnabled = true;
+                                } else {
+                                  isConfirmButtonEnabled = false;
+                                }
                               });
                             },
                           ),
@@ -716,25 +723,17 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                                       .collection('Biginfo')
                                       .doc(roomId);
                                   await roomDoc.update({
-                                    "users_id": FieldValue.arrayUnion(
-                                        [UserProvider.userId]),
-                                    "users_name": FieldValue.arrayUnion(
-                                        [UserProvider.userName]),
+                                    "users_id": [
+                                      FirebaseAuth.instance.currentUser!.uid
+                                    ],
+                                    "users_name": [
+                                      FirebaseAuth.instance.currentUser!.uid
+                                    ],
                                   });
                                   setState(() {
                                     roomCode.add(roomCodeText);
                                   });
                                   roomDoc.get().then((docSnapshot) {
-                                    final roomData = docSnapshot.data();
-                                    final Title = roomData?['title'] as String;
-                                    debugPrint(Title);
-                                    final Mission =
-                                        roomData?['mission'] as String;
-                                    debugPrint(Mission);
-                                    final Image =
-                                        roomData?['roomImage'] as String;
-                                    debugPrint(Image);
-
                                     Navigator.pop(context);
                                     Navigator.push(
                                       context,
@@ -744,7 +743,6 @@ class TabbarviewinmoaState extends State<Tabbarviewinmoa>
                                         ),
                                       ),
                                     );
-                                    // 이제 roomTitle을 사용하여 원하는 곳에 표시할 수 있습니다.
                                   }).catchError((error) {
                                     debugPrint(
                                         'Error getting document: $error');

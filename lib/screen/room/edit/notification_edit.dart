@@ -79,7 +79,7 @@ class _EditNotificationState extends State<EditNotification> {
                     await docRef.update({
                       "title": RoomProvider.title ?? roomData['title'],
                       "image": RoomProvider.image ?? roomData['image'],
-                      "content": RoomProvider.context ?? roomData['content']
+                      "context": RoomProvider.context ?? roomData['content']
                     });
                     Navigator.pop(context);
                   },

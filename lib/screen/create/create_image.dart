@@ -125,17 +125,17 @@ class _RoomImageSetState extends State<RoomImageSet> {
                                   },
                                 });
 
-                                final docRef2 = FirebaseFirestore.instance
-                                    .collection("Smallinfo")
-                                    .doc(docRef.id);
-                                final notificationRef =
-                                    docRef2.collection("notifications").doc();
-                                await notificationRef.set({
-                                  "id": notificationRef.id,
-                                  "title": "",
-                                  "context": "",
-                                  "Image": "",
-                                });
+                                // final docRef2 = FirebaseFirestore.instance
+                                //     .collection("Smallinfo")
+                                //     .doc(docRef.id);
+                                // final notificationRef =
+                                //     docRef2.collection("notifications").doc();
+                                // await notificationRef.set({
+                                //   "id": notificationRef.id,
+                                //   "title": "",
+                                //   "context": "",
+                                //   "Image": "",
+                                // });
                                 Navigator.pop(context);
                                 // ignore: use_build_context_synchronously
                                 Navigator.push(
