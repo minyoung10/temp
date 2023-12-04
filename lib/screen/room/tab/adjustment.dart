@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../add/adjustment_add.dart';
+import '../add/add_adjustment.dart';
 
 class AdjustmentTab extends StatefulWidget {
   final String id;

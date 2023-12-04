@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../themepage/theme.dart';
-import '../add/notification_add.dart';
+import '../add/add_notification.dart';
 import '../detail/notification_detail.dart';
 
 class MissionTab extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../themepage/theme.dart';
-import '../add/discussion_add.dart';
+import '../add/add_discussion.dart';
 
 class DiscussionTab extends StatefulWidget {
   final String id;
