@@ -98,7 +98,7 @@ class _AddNotificationState extends State<AddAdjustment> {
                 child: ElevatedButton(
                   onPressed: () async {
                     final docRef = FirebaseFirestore.instance
-                        .collection("Smallinfo")
+                        .collection("Biginfo")
                         .doc(widget.id);
                     final adjustmentRef =
                         docRef.collection("adjustments").doc();

@@ -24,7 +24,7 @@ class DiscussionTabState extends State<DiscussionTab> {
         Expanded(
           child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: firestore
-                .collection('Smallinfo')
+                .collection('Biginfo')
                 .doc(widget.id)
                 .collection('discussions')
                 .snapshots(),
@@ -59,7 +59,8 @@ class DiscussionTabState extends State<DiscussionTab> {
                             ),
                             Container(
                               padding: const EdgeInsets.all(10),
-                              color: const Color.fromRGBO(227, 255, 217, 1), // 연두색 설정
+                              color: const Color.fromRGBO(
+                                  227, 255, 217, 1), // 연두색 설정
                               child: Text(
                                 roomData[index]['context'],
                                 style: blackw500.copyWith(fontSize: 18),

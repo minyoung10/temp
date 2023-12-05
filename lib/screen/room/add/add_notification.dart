@@ -146,7 +146,7 @@ class _AddNotificationState extends State<AddNotification> {
                 child: ElevatedButton(
                   onPressed: () async {
                     final docRef = FirebaseFirestore.instance
-                        .collection("Smallinfo")
+                        .collection("Biginfo")
                         .doc(widget.id);
                     final notificationRef =
                         docRef.collection("notifications").doc();

@@ -23,7 +23,7 @@ class _AdjustmentTabState extends State<AdjustmentTab> {
         Expanded(
           child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: firestore
-                .collection('Smallinfo')
+                .collection('Biginfo')
                 .doc(widget.id)
                 .collection('adjustments')
                 .snapshots(),

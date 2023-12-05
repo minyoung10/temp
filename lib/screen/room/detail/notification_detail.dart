@@ -24,7 +24,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: firestore
-            .collection('Smallinfo')
+            .collection('Biginfo')
             .doc(widget.roomId)
             .collection('notifications')
             .snapshots(),
@@ -80,7 +80,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                         icon: const Icon(Icons.delete),
                         onPressed: () async {
                           await FirebaseFirestore.instance
-                              .collection('Smallinfo')
+                              .collection('Biginfo')
                               .doc(widget.roomId)
                               .collection('notifications')
                               .doc(widget.docId)
@@ -122,7 +122,8 @@ class _NotificationDetailState extends State<NotificationDetail> {
                       Container(
                         width: 343,
                         height: 256,
-                        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 20),
                         color: const Color.fromRGBO(227, 255, 217, 1), // 연두색 설정
                         child: Text(
                           content,

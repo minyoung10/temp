@@ -31,7 +31,7 @@ class _EditNotificationState extends State<EditNotification> {
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: firestore
-            .collection('Smallinfo')
+            .collection('Biginfo')
             .doc(widget.roomId)
             .collection('notifications')
             .snapshots(),
@@ -70,7 +70,7 @@ class _EditNotificationState extends State<EditNotification> {
                 TextButton(
                   onPressed: () async {
                     final docRef = FirebaseFirestore.instance
-                        .collection('Smallinfo')
+                        .collection('Biginfo')
                         .doc(widget.roomId)
                         .collection('notifications')
                         .doc(widget.docId);

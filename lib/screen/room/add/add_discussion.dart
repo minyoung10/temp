@@ -146,7 +146,7 @@ class _AddDiscussionState extends State<AddDiscussion> {
                 child: ElevatedButton(
                   onPressed: () async {
                     final docRef = FirebaseFirestore.instance
-                        .collection("Smallinfo")
+                        .collection("Biginfo")
                         .doc(widget.id);
                     final notificationRef =
                         docRef.collection("discussions").doc();

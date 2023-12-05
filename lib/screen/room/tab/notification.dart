@@ -5,14 +5,14 @@ import '../../../themepage/theme.dart';
 import '../add/add_notification.dart';
 import '../detail/notification_detail.dart';
 
-class MissionTab extends StatefulWidget {
+class NotificationTab extends StatefulWidget {
   final String id;
-  const MissionTab({super.key, required this.id});
+  const NotificationTab({super.key, required this.id});
   @override
-  State<MissionTab> createState() => MissionTabState();
+  State<NotificationTab> createState() => NotificationTabState();
 }
 
-class MissionTabState extends State<MissionTab> {
+class NotificationTabState extends State<NotificationTab> {
   final firestore = FirebaseFirestore.instance;
   String? roomDataId;
   String? userindex;
@@ -25,7 +25,7 @@ class MissionTabState extends State<MissionTab> {
         Expanded(
           child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: firestore
-                .collection('Smallinfo')
+                .collection('Biginfo')
                 .doc(widget.id)
                 .collection('notifications')
                 .snapshots(),
@@ -71,7 +71,8 @@ class MissionTabState extends State<MissionTab> {
                             ),
                             Container(
                               padding: const EdgeInsets.all(10),
-                              color: const Color.fromRGBO(227, 255, 217, 1), // 연두색 설정
+                              color: const Color.fromRGBO(
+                                  227, 255, 217, 1), // 연두색 설정
                               child: Text(
                                 roomData[index]['context'],
                                 style: blackw500.copyWith(fontSize: 18),

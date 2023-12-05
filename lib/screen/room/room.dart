@@ -250,7 +250,7 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
                     child: TabBarView(
                       controller: _tabController,
                       children: [
-                        MissionTab(id: widget.id),
+                        NotificationTab(id: widget.id),
                         MeetingTab(id: widget.id),
                         DiscussionTab(id: widget.id),
                         AdjustmentTab(id: widget.id),
