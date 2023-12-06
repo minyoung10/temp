@@ -17,22 +17,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageScreenState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  final FocusNode _textFieldFocus = FocusNode();
+  final TextEditingController _textEditingController = TextEditingController();
+  bool _isTextFieldEmpty = true;
+  String _enteredText = '';
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _textFieldFocus.addListener(_updateTextFieldState);
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _textFieldFocus.removeListener(_updateTextFieldState);
+    _textFieldFocus.dispose();
+    _textEditingController.dispose();
     super.dispose();
-
-    if (UserProvider.userName != null) {
-      name = UserProvider.userName;
-    }
   }
+
+  void _updateTextFieldState() {
+    setState(() {
+      _enteredText = _textEditingController.text;
+      _isTextFieldEmpty = _enteredText.isEmpty;
+    });
+  }
+
+  bool isConfirmButtonEnabled = false;
 
   String? name;
   List<String> roomCode = [];
@@ -151,7 +161,6 @@ class _HomePageScreenState extends State<HomePage>
   }
 
   void _showEnterRoomBottomSheet(BuildContext context) {
-    bool isConfirmButtonEnabled = false;
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
