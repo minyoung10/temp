@@ -113,8 +113,7 @@ class _RoomImageSetState extends State<RoomImageSet> {
                                 ],
                                 "users_name": [UserProvider.userName],
                                 'users_job': {
-                                  FirebaseAuth.instance.currentUser!.uid:
-                                      BigInfoProvider.job
+                                  UserProvider.userName: BigInfoProvider.job
                                 },
                               });
                               Navigator.pop(context);

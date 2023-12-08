@@ -46,6 +46,7 @@ class NotificationTabState extends State<NotificationTab> {
                   shrinkWrap: true,
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
+                    Map<String, dynamic> writer_job = roomData[index]['job'];
                     return GestureDetector(
                       onTap: () {
                         debugPrint(roomData[index]['id']);
@@ -65,9 +66,18 @@ class NotificationTabState extends State<NotificationTab> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              roomData[index]['title'],
-                              style: blackw700.copyWith(fontSize: 18),
+                            Row(
+                              children: [
+                                Text(
+                                  roomData[index]['title'],
+                                  style: blackw700.copyWith(fontSize: 18),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${roomData[index]['writer']} (${writer_job[roomData[index]['writer']]})',
+                                  style: blackw500.copyWith(fontSize: 18),
+                                ),
+                              ],
                             ),
                             Container(
                               padding: const EdgeInsets.all(10),

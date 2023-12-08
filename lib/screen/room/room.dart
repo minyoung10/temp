@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../info/user.dart';
 import '../../themepage/theme.dart';
 import '../bottom/home.dart';
 import 'tab/adjustment.dart';
@@ -52,6 +53,8 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
           if (filteredDocs.isNotEmpty) {
             final roomSnapshot = filteredDocs.first;
             final roomData = roomSnapshot.data();
+
+            Map<String, dynamic> usersJob = roomData['users_job'];
 
             return Scaffold(
               backgroundColor: Colors.white,
@@ -109,6 +112,16 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
                             style: whitew700.copyWith(
                               fontSize: 24.0,
                             )),
+                      ),
+                      Positioned(
+                        top: 236,
+                        left: 200,
+                        child: Text(
+                          roomData['code'],
+                          style: whitew700.copyWith(
+                            fontSize: 24.0,
+                          ),
+                        ),
                       ),
                       Positioned(
                         top: 270,

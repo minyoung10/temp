@@ -335,7 +335,7 @@ class _EntranceState extends State<Entrance> {
                             await roomDoc.update({
                               "users_id": FieldValue.arrayUnion(
                                   [FirebaseAuth.instance.currentUser!.uid]),
-                              "users_job.${FirebaseAuth.instance.currentUser!.uid}":
+                              "users_job.${UserProvider.userName}":
                                   BigInfoProvider.job,
                               "users_name":
                                   FieldValue.arrayUnion([UserProvider.userName])
