@@ -55,7 +55,7 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
             final roomData = roomSnapshot.data();
 
             Map<String, dynamic> usersJob = roomData['users_job'];
-
+            UserProvider.userJob = usersJob[UserProvider.userName];
             return Scaffold(
               backgroundColor: Colors.white,
               body: Column(
@@ -89,6 +89,22 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
                           icon: const Icon(
                             Icons.arrow_back_ios_rounded,
                           ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 73,
+                        right: 70,
+                        child: GestureDetector(
+                          onTap: () async {
+                            _showMember(context, '1');
+                          },
+                          child: const SizedBox(
+                              width: 30,
+                              height: 18,
+                              child: Icon(
+                                Icons.people,
+                                color: Colors.white,
+                              )),
                         ),
                       ),
                       Positioned(
@@ -277,6 +293,78 @@ class _RoomState extends State<Room> with SingleTickerProviderStateMixin {
             return const Text('');
           }
         });
+  }
+
+  void _showMember(BuildContext context, String text) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(23.0)),
+      ),
+      builder: (BuildContext context) {
+        return StreamBuilder(
+          stream: firestore.collection('Biginfo').snapshots(),
+          builder: (BuildContext context,
+              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final docs = snapshot.data!.docs;
+            final filteredDocs =
+                docs.where((doc) => doc['id'] == widget.id).toList();
+
+            if (filteredDocs.isNotEmpty) {
+              final roomSnapshot = filteredDocs.first;
+              final roomData = roomSnapshot.data();
+              List<dynamic> usersNameList = roomData["users_name"];
+
+              Map<String, dynamic> usersJob = roomData['users_job'];
+              UserProvider.userJob = usersJob[UserProvider.userName];
+
+              return Container(
+                width: double.infinity,
+                height: 200,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 25, top: 25),
+                        child: const Text(
+                          '멤버',
+                          style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: -1),
+                        ),
+                      ),
+                      for (var userName in usersNameList)
+                        Row(
+                          children: [
+                            Text(
+                              userName.toString(),
+                              style: blackw700.copyWith(fontSize: 20),
+                            ),
+                            Text(
+                              ' ${usersJob[userName.toString()]}',
+                              style: blackw500.copyWith(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return const Text('');
+            }
+          },
+        );
+      },
+    );
   }
 
   void _showBottomSheet(BuildContext context, String text) {

@@ -13,9 +13,11 @@ import '../../../themepage/theme.dart';
 
 class AddNotification extends StatefulWidget {
   final String id;
+  final String job;
 
   const AddNotification({
     required this.id,
+    required this.job,
     super.key,
   });
 
@@ -163,7 +165,7 @@ class _AddNotificationState extends State<AddNotification> {
                         "image": BigInfoProvider.roomImage,
                         "id": notificationRef.id,
                         "writer": UserProvider.userName,
-                        "job": docSnapshot.data()?["users_job"],
+                        "job": widget.job,
                       });
                     } else {
                       // 문서가 존재하지 않을 때의 처리
