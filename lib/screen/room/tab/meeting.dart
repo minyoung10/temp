@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../info/user.dart';
 import '../../../themepage/theme.dart';
 import '../add/add_meeting.dart';
-import '../detail/notification_detail.dart';
+import '../detail/detail_meeting.dart';
+import '../detail/detail_notification.dart';
 
 class MeetingTab extends StatefulWidget {
   final String id;
@@ -54,7 +56,7 @@ class MeetingTabState extends State<MeetingTab> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NotificationDetail(
+                            builder: (context) => MeetingDetail(
                               roomId: widget.id,
                               docId: roomData[index]['id'],
                             ),
@@ -111,6 +113,7 @@ class MeetingTabState extends State<MeetingTab> {
                 MaterialPageRoute(
                   builder: (context) => AddMeeting(
                     id: widget.id,
+                    job: UserProvider.userJob as String,
                   ),
                 ),
               );

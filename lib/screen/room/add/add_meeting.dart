@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../info/user.dart';
 import '../../../themepage/theme.dart';
 
 class AddMeeting extends StatefulWidget {
   final String id;
+  final String job;
 
   const AddMeeting({
     required this.id,
+    required this.job,
     super.key,
   });
 
@@ -103,11 +106,11 @@ class _AddMeetingState extends State<AddMeeting> {
                           //갤러리에서 가지고 온 사진들은 리스트 변수에 저장되므로 addAll()을 사용해서 images와 multiImage 리스트를 합쳐줍니다.
                           images.addAll(multiImage);
                           _uploadImageToFirebase();
-                          for (var xFile in multiImage) {
-                            if (xFile != null) {
-                              print(xFile.path);
-                            }
-                          }
+                          // for (var xFile in multiImage) {
+                          //   if (xFile != null) {
+                          //     print(xFile.path);
+                          //   }
+                          // }
                         });
                       },
                       icon: const Icon(
@@ -176,12 +179,26 @@ class _AddMeetingState extends State<AddMeeting> {
                     final docRef = FirebaseFirestore.instance
                         .collection("Biginfo")
                         .doc(widget.id);
-                    final notificationRef = docRef.collection("meetings").doc();
-                    await notificationRef.set({
-                      "title": _enteredText,
-                      "images": uploadedImageUrls,
-                      "id": notificationRef.id,
-                    });
+
+                    DocumentSnapshot<Map<String, dynamic>> docSnapshot =
+                        await docRef.get();
+
+                    if (docSnapshot.exists) {
+                      // 문서가 존재할 때만 데이터를 사용
+                      final notificationRef =
+                          docRef.collection("meetings").doc();
+                      await notificationRef.set({
+                        "title": _enteredText,
+                        "images": uploadedImageUrls,
+                        "id": notificationRef.id,
+                        "writer": UserProvider.userName,
+                        "job": widget.job,
+                      });
+                    } else {
+                      // 문서가 존재하지 않을 때의 처리
+                      print("문서가 존재하지 않습니다.");
+                    }
+
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(

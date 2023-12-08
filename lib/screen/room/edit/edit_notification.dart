@@ -51,61 +51,42 @@ class _EditNotificationState extends State<EditNotification> {
 
           return Scaffold(
             appBar: AppBar(
-              leading: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Center(
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                  ),
+              title: const Text(
+                '공지 수정',
+                style: TextStyle(
+                  fontFamily: 'Pretendard',
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              title: const Text('Edit'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () async {
-                    final docRef = FirebaseFirestore.instance
-                        .collection('Biginfo')
-                        .doc(widget.roomId)
-                        .collection('notifications')
-                        .doc(widget.docId);
-
-                    await docRef.update({
-                      "title": RoomProvider.title ?? roomData['title'],
-                      "image": RoomProvider.image ?? roomData['image'],
-                      "context": RoomProvider.context ?? roomData['content']
-                    });
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Save'),
-                ),
-              ],
             ),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _pickedFile != null
-                    ? Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          image: DecorationImage(
-                              image: FileImage(File(_pickedFile!.path)),
-                              fit: BoxFit.fitHeight),
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            image: DecorationImage(
+                                image: FileImage(File(_pickedFile!.path)),
+                                fit: BoxFit.fitHeight),
+                          ),
+                          width: double.infinity,
+                          height: 300,
                         ),
-                        width: double.infinity,
-                        height: 300,
                       )
-                    : AspectRatio(
-                        aspectRatio: 1 / 0.7,
-                        child: Image.network(
-                          width: MediaQuery.of(context).size.width,
-                          image,
-                          fit: BoxFit.fitWidth,
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: AspectRatio(
+                          aspectRatio: 1 / 0.7,
+                          child: Image.network(
+                            width: MediaQuery.of(context).size.width,
+                            image,
+                            fit: BoxFit.fitWidth,
+                          ),
                         ),
                       ),
                 Row(
@@ -166,6 +147,48 @@ class _EditNotificationState extends State<EditNotification> {
                         },
                       ),
                     ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final docRef = FirebaseFirestore.instance
+                          .collection('Biginfo')
+                          .doc(widget.roomId)
+                          .collection('notifications')
+                          .doc(widget.docId);
+
+                      await docRef.update({
+                        "title": RoomProvider.title ?? roomData['title'],
+                        "image": RoomProvider.image ?? roomData['image'],
+                        "context": RoomProvider.context ?? roomData['context']
+                      });
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      disabledBackgroundColor: Colors.grey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(11),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                    ),
+                    child: const SizedBox(
+                      width: 343,
+                      height: 45,
+                      child: Center(
+                        child: Text(
+                          '수정하기',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],

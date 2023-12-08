@@ -3,30 +3,31 @@ import 'package:flutter/material.dart';
 
 import '../../../themepage/theme.dart';
 import '../../bottom/home.dart';
-import '../edit/notification_edit.dart';
+import '../edit/edit_meeting.dart';
+import '../edit/edit_notification.dart';
 
-class NotificationDetail extends StatefulWidget {
+class MeetingDetail extends StatefulWidget {
   final String roomId;
   final String docId;
 
-  const NotificationDetail({
+  const MeetingDetail({
     super.key,
     required this.roomId,
     required this.docId,
   });
 
   @override
-  State<NotificationDetail> createState() => _NotificationDetailState();
+  State<MeetingDetail> createState() => _MeetingDetailState();
 }
 
-class _NotificationDetailState extends State<NotificationDetail> {
+class _MeetingDetailState extends State<MeetingDetail> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: firestore
             .collection('Biginfo')
             .doc(widget.roomId)
-            .collection('notifications')
+            .collection('meetings')
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -42,11 +43,10 @@ class _NotificationDetailState extends State<NotificationDetail> {
           if (filteredDocs.isNotEmpty) {
             final roomSnapshot = filteredDocs.first;
             final roomData = roomSnapshot.data();
-            final image = roomData['image'] as String;
             final title = roomData['title'] as String;
-            final content = roomData['context'] as String;
             final writer = roomData['writer'] as String;
             final job = roomData['job'] as String;
+            List<String> images = List.castFrom(roomData['images']);
 
             return Scaffold(
               appBar: AppBar(
@@ -60,7 +60,15 @@ class _NotificationDetailState extends State<NotificationDetail> {
                     );
                   },
                 ),
-                title: const Text('공지'),
+                title: const Text(
+                  '모임',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 actions: <Widget>[
                   Row(
                     children: [
@@ -70,7 +78,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => EditNotification(
+                              builder: (context) => EditMeeting(
                                 roomId: widget.roomId,
                                 docId: widget.docId,
                               ),
@@ -84,7 +92,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                           await FirebaseFirestore.instance
                               .collection('Biginfo')
                               .doc(widget.roomId)
-                              .collection('notifications')
+                              .collection('meetings')
                               .doc(widget.docId)
                               .delete();
                           Navigator.pop(context);
@@ -101,44 +109,38 @@ class _NotificationDetailState extends State<NotificationDetail> {
                   child: Column(
                     children: <Widget>[
                       const SizedBox(height: 20),
-                      SizedBox(
-                        width: 343,
-                        height: 256,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(
-                            image,
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 27),
+                      Text(title,
+                          style: blackw700.copyWith(
+                            fontSize: 24,
+                          )),
                       Row(
                         children: [
-                          Text(title,
-                              style: blackw700.copyWith(
-                                fontSize: 18,
-                              )),
                           const Spacer(),
                           Text(
                             '$writer ($job)',
-                            style: blackw500.copyWith(fontSize: 18),
+                            style: blackw500.copyWith(fontSize: 16),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
-                      Container(
-                        width: 343,
-                        height: 256,
-                        padding:
-                            const EdgeInsets.only(left: 20, right: 20, top: 20),
-                        color: const Color.fromRGBO(227, 255, 217, 1), // 연두색 설정
-                        child: Text(
-                          content,
-                          style: blackw500.copyWith(fontSize: 16),
+                      const SizedBox(height: 20),
+                      for (String imageUrl in images)
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: 343,
+                              height: 256,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: Image.network(
+                                  imageUrl,
+                                  width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 27),
+                          ],
                         ),
-                      ),
                     ],
                   ),
                 ),

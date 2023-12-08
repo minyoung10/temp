@@ -4,7 +4,7 @@ import 'package:mo_final/info/user.dart';
 
 import '../../../themepage/theme.dart';
 import '../add/add_notification.dart';
-import '../detail/notification_detail.dart';
+import '../detail/detail_notification.dart';
 
 class NotificationTab extends StatefulWidget {
   final String id;
