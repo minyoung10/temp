@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../info/big.dart';
 import '../../../themepage/theme.dart';
 
 class AddMeeting extends StatefulWidget {

@@ -154,7 +154,7 @@ class _AddNotificationState extends State<AddNotification> {
                       "title": _enteredText,
                       "context": _textFieldController.text,
                       "image": BigInfoProvider.roomImage,
-                      "id": notificationRef.id,
+                      "id": notificationRef.id
                     });
                     Navigator.pop(context);
                   },
